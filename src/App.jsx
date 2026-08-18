@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './sections/HeroSection';
 import ProblemSection from './sections/ProblemSection';
@@ -9,13 +9,19 @@ import FinalCTASection from './sections/FinalCTASection';
 import Footer from './components/Footer';
 
 export function App() {
+  const [commandPaletteTrigger, setCommandPaletteTrigger] = useState(false);
+  const [demoRevealTrigger, setDemoRevealTrigger] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 font-sans selection:bg-violet-400/30 selection:text-violet-900">
-      <Navbar />
+      <Navbar onOpenCommandPalette={() => setCommandPaletteTrigger(prev => !prev)} />
       <main className="flex-1">
-        <HeroSection />
+        <HeroSection onTriggerDemoReveal={() => setDemoRevealTrigger(prev => !prev)} />
         <ProblemSection />
-        <DashboardSection />
+        <DashboardSection 
+          externalCommandPaletteToggle={commandPaletteTrigger} 
+          externalDemoRevealTrigger={demoRevealTrigger}
+        />
         <HowItWorksSection />
         <UseCasesSection />
         <FinalCTASection />

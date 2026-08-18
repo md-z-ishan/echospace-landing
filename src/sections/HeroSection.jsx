@@ -1,10 +1,10 @@
 import React from 'react';
-import { Sparkles, ArrowRight, Network, Play, ShieldCheck } from 'lucide-react';
+import { Sparkles, Play, ShieldCheck, Network } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 import HeroVisual from '../components/HeroVisual';
 
-export const HeroSection = () => {
+export const HeroSection = ({ onTriggerDemoReveal }) => {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Background Subtle Mesh Grid */}
@@ -55,6 +55,7 @@ export const HeroSection = () => {
                 size="lg" 
                 icon={Play}
                 onClick={() => {
+                  if (onTriggerDemoReveal) onTriggerDemoReveal();
                   const el = document.getElementById('dashboard');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}

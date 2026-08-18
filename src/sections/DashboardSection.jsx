@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Sparkles, Bot, BarChart2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sparkles } from 'lucide-react';
 import Container from '../components/ui/Container';
 import Sidebar from '../components/Dashboard/Sidebar';
 import Controls from '../components/Dashboard/Controls';
@@ -13,7 +13,7 @@ import CommandPalette from '../components/CommandPalette';
 import NodeInspector from '../components/Dashboard/NodeInspector';
 import useNodeMap from '../hooks/useNodeMap';
 
-export const DashboardSection = () => {
+export const DashboardSection = ({ externalCommandPaletteToggle, externalDemoRevealTrigger }) => {
   const {
     nodes,
     allNodes,
@@ -48,6 +48,20 @@ export const DashboardSection = () => {
   const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [quickAddType, setQuickAddType] = useState('memory');
+
+  useEffect(() => {
+    if (externalCommandPaletteToggle !== undefined && externalCommandPaletteToggle !== false) {
+      setIsCommandPaletteOpen(true);
+    }
+  }, [externalCommandPaletteToggle]);
+
+  useEffect(() => {
+    if (externalDemoRevealTrigger !== undefined && externalDemoRevealTrigger !== false) {
+      if (!revealConnections) {
+        toggleRevealConnections();
+      }
+    }
+  }, [externalDemoRevealTrigger]);
 
   const handleOpenQuickAdd = (type) => {
     setQuickAddType(type);
