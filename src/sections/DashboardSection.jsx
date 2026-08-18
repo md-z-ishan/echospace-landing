@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Network } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import Container from '../components/ui/Container';
 import Sidebar from '../components/Dashboard/Sidebar';
 import Controls from '../components/Dashboard/Controls';
@@ -25,6 +25,8 @@ export const DashboardSection = () => {
     setSearchQuery,
     activeFilter,
     setActiveFilter,
+    layoutMode,
+    setLayoutMode,
     addNode,
   } = useNodeMap();
 
@@ -49,7 +51,7 @@ export const DashboardSection = () => {
             Create Your Knowledge Map
           </h2>
           <p className="text-base sm:text-lg text-slate-600">
-            Select memories or ideas from the sidebar, inspect relationships, or click{' '}
+            Select memories or ideas, switch layouts (<strong className="text-slate-800">Cluster, Timeline, Categories</strong>), or click{' '}
             <strong className="text-violet-700">"Reveal Hidden Connections"</strong> to see AI suggested linkages.
           </p>
         </div>
@@ -62,6 +64,8 @@ export const DashboardSection = () => {
             onToggleReveal={toggleRevealConnections}
             onOpenQuickAdd={handleOpenQuickAdd}
             suggestedCount={suggestedConnectionsCount}
+            layoutMode={layoutMode}
+            onChangeLayoutMode={setLayoutMode}
           />
 
           {/* Main Workspace Area (Sidebar + Canvas) */}

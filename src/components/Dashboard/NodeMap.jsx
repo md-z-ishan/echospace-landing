@@ -9,7 +9,6 @@ export const NodeMap = ({
   revealConnections
 }) => {
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
-  const [hoveredConn, setHoveredConn] = useState(null);
 
   const getNode = (id) => nodes.find((n) => n.id === id);
 
@@ -66,7 +65,7 @@ export const NodeMap = ({
                 stroke={isAI ? "url(#aiConnGrad)" : "url(#solidConnGrad)"}
                 strokeWidth={isSelected || isHighlighted ? 3 : isAI ? 2.2 : 1.8}
                 strokeDasharray={isAI ? "5 5" : "none"}
-                className={isAI ? "animate-reveal-line" : "transition-all duration-300"}
+                className={`transition-all duration-700 ease-in-out ${isAI ? "animate-reveal-line" : ""}`}
                 opacity={hoveredNodeId || selectedNodeId ? (isHighlighted || isSelected ? 1 : 0.2) : 0.65}
               />
               {/* Floating Link Label */}
@@ -78,7 +77,7 @@ export const NodeMap = ({
                 fontFamily="JetBrains Mono"
                 textAnchor="middle"
                 dy="-6"
-                className="opacity-80 font-medium pointer-events-none drop-shadow"
+                className="opacity-80 font-medium pointer-events-none drop-shadow transition-all duration-700 ease-in-out"
               >
                 {conn.label}
               </text>
@@ -87,7 +86,7 @@ export const NodeMap = ({
         })}
       </svg>
 
-      {/* Nodes Render Layer */}
+      {/* Nodes Render Layer with Smooth Transition */}
       {nodes.map((node) => {
         const isSelected = selectedNodeId === node.id;
         const isHovered = hoveredNodeId === node.id;
@@ -96,7 +95,7 @@ export const NodeMap = ({
           <div
             key={node.id}
             style={{ left: `${node.x}%`, top: `${node.y}%` }}
-            className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
+            className="absolute -translate-x-1/2 -translate-y-1/2 z-10 transition-all duration-700 cubic-bezier(0.34, 1.56, 0.64, 1)"
           >
             <Node
               node={node}

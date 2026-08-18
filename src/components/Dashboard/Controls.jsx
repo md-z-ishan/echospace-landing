@@ -1,33 +1,68 @@
 import React from 'react';
-import { Plus, Eye, EyeOff, Sparkles, Share2, Download } from 'lucide-react';
+import { Plus, Sparkles, Share2, Download, Network, Clock, Layers } from 'lucide-react';
 import Button from '../ui/Button';
 
 export const Controls = ({
   revealConnections,
   onToggleReveal,
   onOpenQuickAdd,
-  suggestedCount = 4
+  suggestedCount = 4,
+  layoutMode,
+  onChangeLayoutMode
 }) => {
   return (
-    <div className="p-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
-      {/* Quick Add Buttons */}
-      <div className="flex items-center gap-2">
-        <Button
-          variant="secondary"
-          size="sm"
-          icon={Plus}
-          onClick={() => onOpenQuickAdd('memory')}
-        >
-          Add Memory
-        </Button>
-        <Button
-          variant="secondary"
-          size="sm"
-          icon={Plus}
-          onClick={() => onOpenQuickAdd('idea')}
-        >
-          Add Idea
-        </Button>
+    <div className="p-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
+      {/* Quick Add Buttons & Layout Switcher */}
+      <div className="flex flex-wrap items-center gap-3">
+        {/* Add Actions */}
+        <div className="flex items-center gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={Plus}
+            onClick={() => onOpenQuickAdd('memory')}
+          >
+            Add Memory
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={Plus}
+            onClick={() => onOpenQuickAdd('idea')}
+          >
+            Add Idea
+          </Button>
+        </div>
+
+        {/* Spatial Layout Preset Switcher */}
+        <div className="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-medium">
+          <button
+            onClick={() => onChangeLayoutMode('cluster')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'cluster' ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-500 hover:text-slate-900'}`}
+            title="Organic Network Cluster Layout"
+          >
+            <Network className="w-3.5 h-3.5 text-violet-500" />
+            <span className="hidden sm:inline">Cluster</span>
+          </button>
+
+          <button
+            onClick={() => onChangeLayoutMode('timeline')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'timeline' ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-500 hover:text-slate-900'}`}
+            title="Chronological Left-to-Right Timeline Layout"
+          >
+            <Clock className="w-3.5 h-3.5 text-cyan-500" />
+            <span className="hidden sm:inline">Timeline</span>
+          </button>
+
+          <button
+            onClick={() => onChangeLayoutMode('category')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'category' ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-500 hover:text-slate-900'}`}
+            title="Categorized Memories vs Ideas Grouping Layout"
+          >
+            <Layers className="w-3.5 h-3.5 text-purple-500" />
+            <span className="hidden sm:inline">Categories</span>
+          </button>
+        </div>
       </div>
 
       {/* Signature Reveal Button */}
