@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Bot, BarChart2 } from 'lucide-react';
 import Container from '../components/ui/Container';
 import Sidebar from '../components/Dashboard/Sidebar';
 import Controls from '../components/Dashboard/Controls';
@@ -7,6 +7,9 @@ import NodeMap from '../components/Dashboard/NodeMap';
 import StatusBar from '../components/Dashboard/StatusBar';
 import QuickAddModal from '../components/Dashboard/QuickAddModal';
 import ConnectNodesModal from '../components/Dashboard/ConnectNodesModal';
+import AiAssistantDrawer from '../components/Dashboard/AiAssistantDrawer';
+import AnalyticsModal from '../components/Dashboard/AnalyticsModal';
+import CommandPalette from '../components/CommandPalette';
 import NodeInspector from '../components/Dashboard/NodeInspector';
 import useNodeMap from '../hooks/useNodeMap';
 
@@ -33,12 +36,17 @@ export const DashboardSection = () => {
     availableTags,
     aiSimilarityThreshold,
     setAiSimilarityThreshold,
+    timelineStep,
+    setTimelineStep,
     addNode,
     addCustomConnection,
   } = useNodeMap();
 
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
+  const [isAiDrawerOpen, setIsAiDrawerOpen] = useState(false);
+  const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [quickAddType, setQuickAddType] = useState('memory');
 
   const handleOpenQuickAdd = (type) => {
@@ -59,8 +67,8 @@ export const DashboardSection = () => {
             Create Your Knowledge Map
           </h2>
           <p className="text-base sm:text-lg text-slate-600">
-            Select memories or ideas, link nodes (<strong className="text-slate-800">Link Nodes</strong>), filter by tags, or click{' '}
-            <strong className="text-violet-700">"Reveal Hidden Connections"</strong> to see AI suggested linkages.
+            Press <strong className="font-mono text-violet-700 bg-violet-50 px-2 py-0.5 rounded border border-violet-200">⌘K</strong> for Command Palette, test <strong className="text-slate-800">Time Travel Slider</strong>, or click{' '}
+            <strong className="text-violet-700">"Ask AI Brain"</strong> for contextual node insights.
           </p>
         </div>
 
@@ -72,11 +80,15 @@ export const DashboardSection = () => {
             onToggleReveal={toggleRevealConnections}
             onOpenQuickAdd={handleOpenQuickAdd}
             onOpenConnectModal={() => setIsConnectModalOpen(true)}
+            onOpenAiDrawer={() => setIsAiDrawerOpen(true)}
+            onOpenAnalyticsModal={() => setIsAnalyticsOpen(true)}
             suggestedCount={suggestedConnectionsCount}
             layoutMode={layoutMode}
             onChangeLayoutMode={setLayoutMode}
             aiThreshold={aiSimilarityThreshold}
             onChangeAiThreshold={setAiSimilarityThreshold}
+            timelineStep={timelineStep}
+            onChangeTimelineStep={setTimelineStep}
             allNodes={allNodes}
             connections={connections}
           />
@@ -114,6 +126,14 @@ export const DashboardSection = () => {
                   onClose={() => setSelectedNodeId(null)}
                 />
               )}
+
+              {/* Ask AI Brain Drawer Overlay */}
+              {isAiDrawerOpen && (
+                <AiAssistantDrawer
+                  isOpen={isAiDrawerOpen}
+                  onClose={() => setIsAiDrawerOpen(false)}
+                />
+              )}
             </div>
           </div>
 
@@ -140,6 +160,25 @@ export const DashboardSection = () => {
           onClose={() => setIsConnectModalOpen(false)}
           allNodes={allNodes}
           onConnect={addCustomConnection}
+        />
+
+        {/* Graph Analytics Modal */}
+        <AnalyticsModal
+          isOpen={isAnalyticsOpen}
+          onClose={() => setIsAnalyticsOpen(false)}
+          allNodes={allNodes}
+          connections={connections}
+        />
+
+        {/* Raycast Style Command Palette (Cmd+K) */}
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={setIsCommandPaletteOpen}
+          allNodes={allNodes}
+          onSelectNode={(id) => setSelectedNodeId(id)}
+          onOpenQuickAdd={handleOpenQuickAdd}
+          onToggleReveal={toggleRevealConnections}
+          onChangeLayoutMode={setLayoutMode}
         />
       </Container>
     </section>

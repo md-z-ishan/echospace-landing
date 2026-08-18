@@ -1,17 +1,22 @@
 import React from 'react';
-import { Plus, Sparkles, Share2, Download, Network, Clock, Layers, Link, Sliders } from 'lucide-react';
+import { Plus, Sparkles, Share2, Download, Network, Clock, Layers, Link, Sliders, Bot, BarChart2 } from 'lucide-react';
 import Button from '../ui/Button';
+import TimelineSlider from './TimelineSlider';
 
 export const Controls = ({
   revealConnections,
   onToggleReveal,
   onOpenQuickAdd,
   onOpenConnectModal,
+  onOpenAiDrawer,
+  onOpenAnalyticsModal,
   suggestedCount = 4,
   layoutMode,
   onChangeLayoutMode,
   aiThreshold,
   onChangeAiThreshold,
+  timelineStep,
+  onChangeTimelineStep,
   allNodes,
   connections
 }) => {
@@ -34,10 +39,9 @@ export const Controls = ({
   };
 
   return (
-    <div className="p-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
-      {/* Quick Add Buttons & Connect Nodes */}
+    <div className="p-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 select-none">
+      {/* Quick Actions & Layout Switcher */}
       <div className="flex flex-wrap items-center gap-2.5">
-        {/* Add Memory & Idea */}
         <div className="flex items-center gap-2">
           <Button
             variant="secondary"
@@ -96,24 +100,31 @@ export const Controls = ({
         </div>
       </div>
 
-      {/* Signature Reveal & Threshold Controls */}
-      <div className="flex flex-wrap items-center gap-3">
-        {/* AI Similarity Threshold Slider */}
-        {revealConnections && (
-          <div className="hidden lg:flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl text-xs">
-            <Sliders className="w-3.5 h-3.5 text-violet-600" />
-            <span className="font-mono text-slate-600">Match: {aiThreshold}%+</span>
-            <input
-              type="range"
-              min="50"
-              max="95"
-              step="5"
-              value={aiThreshold}
-              onChange={(e) => onChangeAiThreshold(parseInt(e.target.value))}
-              className="w-16 accent-violet-600 cursor-pointer"
-            />
-          </div>
-        )}
+      {/* Timeline Slider & AI Brain Drawer Trigger */}
+      <div className="flex flex-wrap items-center gap-2.5">
+        {/* Timeline Slider */}
+        <TimelineSlider
+          currentStep={timelineStep}
+          onChangeStep={onChangeTimelineStep}
+        />
+
+        {/* Ask AI Brain Button */}
+        <button
+          onClick={onOpenAiDrawer}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 text-violet-300 border border-violet-500/40 text-xs font-semibold hover:bg-slate-800 transition-all cursor-pointer shadow-sm"
+        >
+          <Bot className="w-4 h-4 text-violet-400 animate-pulse" />
+          <span>Ask AI Brain</span>
+        </button>
+
+        {/* Analytics Button */}
+        <button
+          onClick={onOpenAnalyticsModal}
+          className="p-2 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
+          title="Open Graph Analytics"
+        >
+          <BarChart2 className="w-4 h-4 text-violet-600" />
+        </button>
 
         {/* Reveal Hidden Connections Button */}
         <button

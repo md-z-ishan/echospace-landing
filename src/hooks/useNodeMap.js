@@ -38,6 +38,14 @@ const layoutCoordinates = {
   }
 };
 
+const timelineDatesMap = {
+  1: ["Aug 06"],
+  2: ["Aug 06", "Aug 08", "Aug 10"],
+  3: ["Aug 06", "Aug 08", "Aug 10", "Aug 12", "Aug 13"],
+  4: ["Aug 06", "Aug 08", "Aug 10", "Aug 12", "Aug 13", "Aug 14", "Aug 15"],
+  5: ["Aug 06", "Aug 08", "Aug 10", "Aug 12", "Aug 13", "Aug 14", "Aug 15", "Aug 16", "Just Now"],
+};
+
 export const useNodeMap = () => {
   const [nodes, setNodes] = useState([...demoMemories, ...demoIdeas]);
   const [connections, setConnections] = useState(demoConnections);
@@ -48,6 +56,7 @@ export const useNodeMap = () => {
   const [layoutMode, setLayoutMode] = useState('cluster'); // 'cluster', 'timeline', 'category'
   const [selectedTag, setSelectedTag] = useState(null); // Tag focus filter
   const [aiSimilarityThreshold, setAiSimilarityThreshold] = useState(60); // 50 - 95%
+  const [timelineStep, setTimelineStep] = useState(5); // 1 - 5 time steps
 
   const addNode = (newNode) => {
     const createdNode = {
@@ -96,6 +105,8 @@ export const useNodeMap = () => {
     };
   });
 
+  const activeDates = timelineDatesMap[timelineStep] || timelineDatesMap[5];
+
   const filteredNodes = positionedNodes.filter((node) => {
     const matchesSearch = node.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           node.snippet.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -103,8 +114,9 @@ export const useNodeMap = () => {
     
     const matchesFilter = activeFilter === 'all' || node.type === activeFilter;
     const matchesTag = !selectedTag || node.tags.includes(selectedTag);
+    const matchesTimeline = activeDates.includes(node.date);
 
-    return matchesSearch && matchesFilter && matchesTag;
+    return matchesSearch && matchesFilter && matchesTag && matchesTimeline;
   });
 
   // Extract all unique tags across nodes
@@ -147,6 +159,8 @@ export const useNodeMap = () => {
     availableTags,
     aiSimilarityThreshold,
     setAiSimilarityThreshold,
+    timelineStep,
+    setTimelineStep,
     addNode,
     addCustomConnection,
   };
