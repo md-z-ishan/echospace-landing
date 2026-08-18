@@ -1,86 +1,74 @@
 import React from 'react';
-import { PlusCircle, Link, Sparkles, Lightbulb, ArrowRight } from 'lucide-react';
+import { Sparkles, Brain, Network, Zap } from 'lucide-react';
 import Container from '../components/ui/Container';
-import Card from '../components/ui/Card';
-
-const steps = [
-  {
-    step: "01",
-    title: "Add Memories & Ideas",
-    description: "Capture articles, coffee chat notes, book quotes, or shower thoughts as lightweight spatial nodes without needing folders.",
-    icon: PlusCircle,
-    color: "cyan",
-  },
-  {
-    step: "02",
-    title: "Create Connections",
-    description: "Draw direct visual links between related thoughts. Define relationship types like 'Inspired by', 'Builds on', or 'Discussed in'.",
-    icon: Link,
-    color: "violet",
-  },
-  {
-    step: "03",
-    title: "See Patterns Emerge",
-    description: "Watch your personal knowledge graph dynamically organize into clusters of connected thinking across time.",
-    icon: Sparkles,
-    color: "purple",
-  },
-  {
-    step: "04",
-    title: "Rediscover Forgotten Insights",
-    description: "Click 'Reveal Hidden Connections' to let vector similarity surface forgotten memories relevant to your active project.",
-    icon: Lightbulb,
-    color: "amber",
-  },
-];
 
 export const HowItWorksSection = () => {
+  const steps = [
+    {
+      number: "01",
+      title: "Capture Raw Memories & Ideas",
+      description: "Type quick thoughts, book highlights, or voice notes. No folder hierarchy required.",
+      icon: Brain,
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      number: "02",
+      title: "AI Vector Linkage Discovery",
+      description: "EchoSpace computes semantic proximity across your personal knowledge graph in real-time.",
+      icon: Network,
+      color: "from-violet-500 to-purple-500",
+    },
+    {
+      number: "03",
+      title: "Synthesize Unforeseen Connections",
+      description: "Explore associative clusters, query your personal brain graph, and uncover forgotten thesis points.",
+      icon: Zap,
+      color: "from-purple-500 to-pink-500",
+    },
+  ];
+
   return (
-    <section id="how-it-works" className="py-20 bg-slate-50 relative">
+    <section id="how-it-works" className="py-20 md:py-28 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors">
       <Container size="lg">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-mono font-bold tracking-widest text-cyan-600 uppercase bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
-            Intuitive Workflow
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            How EchoSpace Works
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-100 dark:bg-violet-950/80 text-violet-800 dark:text-violet-300 text-xs font-bold font-mono tracking-wide">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>3-Step Autonomous Workflow</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            How EchoSpace Connects Your Brain
           </h2>
-          <p className="text-base sm:text-lg text-slate-600">
-            Four simple steps to transform scattered thoughts into a living visual brain.
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300">
+            From fragmented notes to an interconnected neural knowledge engine in seconds.
           </p>
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((s, idx) => {
-            const Icon = s.icon;
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
             return (
-              <Card key={idx} className="relative flex flex-col justify-between p-6 group hover:border-violet-300">
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="text-2xl font-extrabold font-mono text-slate-300 group-hover:text-violet-500 transition-colors">
-                      {s.step}
-                    </span>
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${s.color === 'cyan' ? 'bg-cyan-50 text-cyan-600' : s.color === 'violet' ? 'bg-violet-50 text-violet-600' : s.color === 'purple' ? 'bg-purple-50 text-purple-600' : 'bg-amber-50 text-amber-600'}`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
+              <div
+                key={idx}
+                className="p-8 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-violet-300 dark:hover:border-violet-600 transition-all duration-300 group hover:-translate-y-1 shadow-sm hover:shadow-xl"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-r ${step.color} text-white flex items-center justify-center font-bold shadow-md group-hover:scale-110 transition-transform`}>
+                    <Icon className="w-6 h-6" />
                   </div>
-
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-violet-700 transition-colors">
-                    {s.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {s.description}
-                  </p>
+                  <span className="text-3xl font-black font-mono text-slate-300 dark:text-slate-700 group-hover:text-violet-500 transition-colors">
+                    {step.number}
+                  </span>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-violet-600 group-hover:translate-x-1 transition-transform">
-                  <span>Learn more</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
-                </div>
-              </Card>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
             );
           })}
         </div>

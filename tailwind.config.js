@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -24,6 +25,11 @@ export default {
           600: '#0891B2',
         },
         slate: {
+          950: '#0B0F19',
+          900: '#0F172A',
+          850: '#162032',
+          800: '#1E293B',
+          700: '#334155',
           400: '#94A3B8',
           500: '#64748B',
           100: '#F1F5F9',
@@ -35,10 +41,10 @@ export default {
         mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        'glow-violet': '0 0 25px rgba(167, 139, 250, 0.35)',
-        'glow-cyan': '0 0 25px rgba(6, 182, 212, 0.35)',
-        'node-hover': '0 0 30px rgba(167, 139, 250, 0.45), 0 10px 20px -5px rgba(15, 23, 42, 0.12)',
-        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+        'glow-violet': '0 0 25px rgba(167, 139, 250, 0.45)',
+        'glow-cyan': '0 0 25px rgba(6, 182, 212, 0.45)',
+        'node-hover': '0 0 30px rgba(167, 139, 250, 0.55), 0 10px 20px -5px rgba(15, 23, 42, 0.25)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.25)',
       },
       animation: {
         'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -52,7 +58,7 @@ export default {
         },
         glow: {
           '0%': { opacity: '0.6', filter: 'drop-shadow(0 0 2px rgba(167, 139, 250, 0.4))' },
-          '100%': { opacity: '1', filter: 'drop-shadow(0 0 8px rgba(167, 139, 250, 0.8))' },
+          '100%': { opacity: '1', filter: 'drop-shadow(0 0 10px rgba(167, 139, 250, 0.9))' },
         }
       }
     },

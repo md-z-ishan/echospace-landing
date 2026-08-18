@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Network, Menu, X, Sparkles, Moon, Sun, Search } from 'lucide-react';
 import Button from './ui/Button';
 import Container from './ui/Container';
+import { playNodeChime } from '../utils/audio';
 
 export const Navbar = ({ onOpenCommandPalette }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,11 +18,14 @@ export const Navbar = ({ onOpenCommandPalette }) => {
   }, []);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    if (!isDarkMode) {
+    const nextMode = !isDarkMode;
+    setIsDarkMode(nextMode);
+    if (nextMode) {
       document.documentElement.classList.add('dark');
+      playNodeChime(880);
     } else {
       document.documentElement.classList.remove('dark');
+      playNodeChime(523.25);
     }
   };
 
@@ -31,14 +35,14 @@ export const Navbar = ({ onOpenCommandPalette }) => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-violet-400 shadow-glow-violet group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-violet-600 flex items-center justify-center text-violet-400 dark:text-white shadow-glow-violet group-hover:scale-105 transition-transform">
               <Network className="w-5 h-5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-violet-600 transition-colors">
+              <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
                 EchoSpace
               </span>
-              <span className="text-[10px] font-mono text-slate-400 tracking-widest uppercase -mt-1">
+              <span className="text-[10px] font-mono text-slate-400 dark:text-slate-400 tracking-widest uppercase -mt-1">
                 Visual Brain
               </span>
             </div>
@@ -46,16 +50,16 @@ export const Navbar = ({ onOpenCommandPalette }) => {
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#problem" className="text-sm font-medium text-slate-600 hover:text-violet-600 transition-colors">
+            <a href="#problem" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
               Why EchoSpace
             </a>
-            <a href="#dashboard" className="text-sm font-medium text-slate-600 hover:text-violet-600 transition-colors">
+            <a href="#dashboard" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
               Knowledge Map
             </a>
-            <a href="#how-it-works" className="text-sm font-medium text-slate-600 hover:text-violet-600 transition-colors">
+            <a href="#how-it-works" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
               How It Works
             </a>
-            <a href="#use-cases" className="text-sm font-medium text-slate-600 hover:text-violet-600 transition-colors">
+            <a href="#use-cases" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
               Use Cases
             </a>
           </nav>
@@ -65,21 +69,21 @@ export const Navbar = ({ onOpenCommandPalette }) => {
             {/* Cmd+K Quick Trigger */}
             <button
               onClick={onOpenCommandPalette}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 hover:border-violet-300 text-xs font-mono text-slate-500 hover:text-violet-600 bg-white hover:bg-violet-50/50 transition-all cursor-pointer shadow-sm"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-violet-300 dark:hover:border-violet-500 text-xs font-mono text-slate-500 dark:text-slate-300 hover:text-violet-600 dark:hover:text-violet-400 bg-white dark:bg-slate-900 hover:bg-violet-50/50 dark:hover:bg-slate-800 transition-all cursor-pointer shadow-sm"
               title="Open Command Palette (Cmd+K)"
             >
               <Search className="w-3.5 h-3.5 text-slate-400" />
               <span>Search</span>
-              <span className="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px] font-bold">⌘K</span>
+              <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-1.5 py-0.5 rounded text-[10px] font-bold">⌘K</span>
             </button>
 
             {/* Theme Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
+              className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-all cursor-pointer shadow-sm active:scale-95"
               title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
-              {isDarkMode ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-slate-600" />}
+              {isDarkMode ? <Sun className="w-4 h-4 text-amber-400 animate-spin" /> : <Moon className="w-4 h-4 text-violet-600" />}
             </button>
 
             {/* Start Free CTA */}
@@ -100,13 +104,13 @@ export const Navbar = ({ onOpenCommandPalette }) => {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg border border-slate-200 text-slate-600"
+              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
             >
-              {isDarkMode ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
+              {isDarkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-violet-600" />}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+              className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -116,32 +120,32 @@ export const Navbar = ({ onOpenCommandPalette }) => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-4 pb-6 border-t border-slate-100 mt-3 flex flex-col gap-4 animate-fade-in">
+          <div className="md:hidden pt-4 pb-6 border-t border-slate-100 dark:border-slate-800 mt-3 flex flex-col gap-4 animate-fade-in bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-xl">
             <a 
               href="#problem" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 hover:text-violet-600 py-1"
+              className="text-base font-medium text-slate-700 dark:text-slate-200 hover:text-violet-600 dark:hover:text-violet-400 py-1"
             >
               Why EchoSpace
             </a>
             <a 
               href="#dashboard" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 hover:text-violet-600 py-1"
+              className="text-base font-medium text-slate-700 dark:text-slate-200 hover:text-violet-600 dark:hover:text-violet-400 py-1"
             >
               Knowledge Map Demo
             </a>
             <a 
               href="#how-it-works" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 hover:text-violet-600 py-1"
+              className="text-base font-medium text-slate-700 dark:text-slate-200 hover:text-violet-600 dark:hover:text-violet-400 py-1"
             >
               How It Works
             </a>
             <a 
               href="#use-cases" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 hover:text-violet-600 py-1"
+              className="text-base font-medium text-slate-700 dark:text-slate-200 hover:text-violet-600 dark:hover:text-violet-400 py-1"
             >
               Use Cases
             </a>

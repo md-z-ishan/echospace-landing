@@ -39,7 +39,7 @@ export const Controls = ({
   };
 
   return (
-    <div className="p-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 select-none">
+    <div className="p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4 select-none transition-colors">
       {/* Quick Actions & Layout Switcher */}
       <div className="flex flex-wrap items-center gap-2.5">
         <div className="flex items-center gap-2">
@@ -70,10 +70,10 @@ export const Controls = ({
         </div>
 
         {/* Spatial Layout Switcher */}
-        <div className="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-medium">
+        <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-medium">
           <button
             onClick={() => onChangeLayoutMode('cluster')}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'cluster' ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-500 hover:text-slate-900'}`}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'cluster' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
             title="Organic Network Cluster Layout"
           >
             <Network className="w-3.5 h-3.5 text-violet-500" />
@@ -82,7 +82,7 @@ export const Controls = ({
 
           <button
             onClick={() => onChangeLayoutMode('timeline')}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'timeline' ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-500 hover:text-slate-900'}`}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'timeline' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
             title="Chronological Left-to-Right Timeline Layout"
           >
             <Clock className="w-3.5 h-3.5 text-cyan-500" />
@@ -91,7 +91,7 @@ export const Controls = ({
 
           <button
             onClick={() => onChangeLayoutMode('category')}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'category' ? 'bg-white text-slate-900 shadow-sm font-semibold' : 'text-slate-500 hover:text-slate-900'}`}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer ${layoutMode === 'category' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
             title="Categorized Memories vs Ideas Grouping Layout"
           >
             <Layers className="w-3.5 h-3.5 text-purple-500" />
@@ -111,7 +111,7 @@ export const Controls = ({
         {/* Ask AI Brain Button */}
         <button
           onClick={onOpenAiDrawer}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 text-violet-300 border border-violet-500/40 text-xs font-semibold hover:bg-slate-800 transition-all cursor-pointer shadow-sm"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-violet-950 text-violet-300 border border-violet-500/40 text-xs font-semibold hover:bg-slate-800 dark:hover:bg-violet-900 transition-all cursor-pointer shadow-sm"
         >
           <Bot className="w-4 h-4 text-violet-400 animate-pulse" />
           <span>Ask AI Brain</span>
@@ -120,10 +120,10 @@ export const Controls = ({
         {/* Analytics Button */}
         <button
           onClick={onOpenAnalyticsModal}
-          className="p-2 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
+          className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           title="Open Graph Analytics"
         >
-          <BarChart2 className="w-4 h-4 text-violet-600" />
+          <BarChart2 className="w-4 h-4 text-violet-600 dark:text-violet-400" />
         </button>
 
         {/* Reveal Hidden Connections Button */}
@@ -133,24 +133,24 @@ export const Controls = ({
             group relative inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-xs transition-all duration-300 shadow-sm cursor-pointer
             ${revealConnections
               ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-glow-violet ring-2 ring-violet-400'
-              : 'bg-gradient-to-r from-violet-50 to-purple-50 hover:from-violet-100 hover:to-purple-100 text-violet-700 border border-violet-200'
+              : 'bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/80 dark:to-purple-950/80 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800'
             }
           `}
         >
-          <Sparkles className={`w-4 h-4 ${revealConnections ? 'animate-spin text-violet-200' : 'text-violet-500'}`} />
+          <Sparkles className={`w-4 h-4 ${revealConnections ? 'animate-spin text-violet-200' : 'text-violet-500 dark:text-violet-400'}`} />
           <span>
             {revealConnections ? 'Hide Suggested Links' : 'Reveal Hidden Connections'}
           </span>
-          <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${revealConnections ? 'bg-white/20 text-white' : 'bg-violet-200 text-violet-800'}`}>
+          <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${revealConnections ? 'bg-white/20 text-white' : 'bg-violet-200 dark:bg-violet-900 text-violet-800 dark:text-violet-200'}`}>
             +{suggestedCount} AI
           </span>
         </button>
 
         {/* Export & Share Action Buttons */}
-        <div className="hidden sm:flex items-center gap-1.5 border-l border-slate-200 pl-3">
+        <div className="hidden sm:flex items-center gap-1.5 border-l border-slate-200 dark:border-slate-800 pl-3">
           <button
             onClick={handleExportJson}
-            className="p-2 rounded-lg text-slate-500 hover:text-violet-600 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             title="Download Graph JSON Backup"
           >
             <Download className="w-4 h-4" />
@@ -162,7 +162,7 @@ export const Controls = ({
                 alert('EchoSpace Map URL copied to clipboard!');
               }
             }}
-            className="p-2 rounded-lg text-slate-500 hover:text-violet-600 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             title="Share Knowledge Graph URL"
           >
             <Share2 className="w-4 h-4" />
