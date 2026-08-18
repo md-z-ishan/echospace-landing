@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { demoMemories, demoIdeas, demoConnections, suggestedConnections } from '../data/demoData';
+import { playRevealSound, playLinkSound } from '../utils/audio';
 
 // Coordinates for different layout modes
 const layoutCoordinates = {
@@ -46,6 +47,7 @@ export const useNodeMap = () => {
   const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'memory', 'idea'
   const [layoutMode, setLayoutMode] = useState('cluster'); // 'cluster', 'timeline', 'category'
   const [selectedTag, setSelectedTag] = useState(null); // Tag focus filter
+  const [aiSimilarityThreshold, setAiSimilarityThreshold] = useState(60); // 50 - 95%
 
   const addNode = (newNode) => {
     const createdNode = {
@@ -68,10 +70,20 @@ export const useNodeMap = () => {
       };
       setConnections((prev) => [...prev, newConn]);
     }
+    playLinkSound();
+  };
+
+  const addCustomConnection = (newConn) => {
+    setConnections((prev) => [...prev, newConn]);
+    playLinkSound();
   };
 
   const toggleRevealConnections = () => {
-    setRevealConnections((prev) => !prev);
+    const nextState = !revealConnections;
+    setRevealConnections(nextState);
+    if (nextState) {
+      playRevealSound();
+    }
   };
 
   // Map nodes with dynamic coordinates based on active layoutMode
@@ -100,8 +112,15 @@ export const useNodeMap = () => {
     new Set(nodes.flatMap((node) => node.tags))
   );
 
+  // Filter suggested connections based on AI similarity threshold
+  const filteredSuggested = suggestedConnections.filter((conn) => {
+    const match = conn.reasoning?.match(/(\d+)%/);
+    const score = match ? parseInt(match[1]) : 75;
+    return score >= aiSimilarityThreshold;
+  });
+
   const activeConnections = revealConnections
-    ? [...connections, ...suggestedConnections]
+    ? [...connections, ...filteredSuggested]
     : connections;
 
   const selectedNode = positionedNodes.find((n) => n.id === selectedNodeId) || null;
@@ -111,7 +130,7 @@ export const useNodeMap = () => {
     allNodes: positionedNodes,
     connections: activeConnections,
     coreConnectionsCount: connections.length,
-    suggestedConnectionsCount: suggestedConnections.length,
+    suggestedConnectionsCount: filteredSuggested.length,
     revealConnections,
     toggleRevealConnections,
     selectedNode,
@@ -126,7 +145,10 @@ export const useNodeMap = () => {
     selectedTag,
     setSelectedTag,
     availableTags,
+    aiSimilarityThreshold,
+    setAiSimilarityThreshold,
     addNode,
+    addCustomConnection,
   };
 };
 

@@ -6,6 +6,7 @@ import Controls from '../components/Dashboard/Controls';
 import NodeMap from '../components/Dashboard/NodeMap';
 import StatusBar from '../components/Dashboard/StatusBar';
 import QuickAddModal from '../components/Dashboard/QuickAddModal';
+import ConnectNodesModal from '../components/Dashboard/ConnectNodesModal';
 import NodeInspector from '../components/Dashboard/NodeInspector';
 import useNodeMap from '../hooks/useNodeMap';
 
@@ -30,10 +31,14 @@ export const DashboardSection = () => {
     selectedTag,
     setSelectedTag,
     availableTags,
+    aiSimilarityThreshold,
+    setAiSimilarityThreshold,
     addNode,
+    addCustomConnection,
   } = useNodeMap();
 
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
+  const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const [quickAddType, setQuickAddType] = useState('memory');
 
   const handleOpenQuickAdd = (type) => {
@@ -54,7 +59,7 @@ export const DashboardSection = () => {
             Create Your Knowledge Map
           </h2>
           <p className="text-base sm:text-lg text-slate-600">
-            Select memories or ideas, filter by tags, switch layouts (<strong className="text-slate-800">Cluster, Timeline, Categories</strong>), or click{' '}
+            Select memories or ideas, link nodes (<strong className="text-slate-800">Link Nodes</strong>), filter by tags, or click{' '}
             <strong className="text-violet-700">"Reveal Hidden Connections"</strong> to see AI suggested linkages.
           </p>
         </div>
@@ -66,9 +71,14 @@ export const DashboardSection = () => {
             revealConnections={revealConnections}
             onToggleReveal={toggleRevealConnections}
             onOpenQuickAdd={handleOpenQuickAdd}
+            onOpenConnectModal={() => setIsConnectModalOpen(true)}
             suggestedCount={suggestedConnectionsCount}
             layoutMode={layoutMode}
             onChangeLayoutMode={setLayoutMode}
+            aiThreshold={aiSimilarityThreshold}
+            onChangeAiThreshold={setAiSimilarityThreshold}
+            allNodes={allNodes}
+            connections={connections}
           />
 
           {/* Main Workspace Area (Sidebar + Canvas) */}
@@ -122,6 +132,14 @@ export const DashboardSection = () => {
           onClose={() => setIsQuickAddOpen(false)}
           initialType={quickAddType}
           onAdd={addNode}
+        />
+
+        {/* Connect Nodes Modal */}
+        <ConnectNodesModal
+          isOpen={isConnectModalOpen}
+          onClose={() => setIsConnectModalOpen(false)}
+          allNodes={allNodes}
+          onConnect={addCustomConnection}
         />
       </Container>
     </section>
