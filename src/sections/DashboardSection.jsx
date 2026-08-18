@@ -27,6 +27,9 @@ export const DashboardSection = () => {
     setActiveFilter,
     layoutMode,
     setLayoutMode,
+    selectedTag,
+    setSelectedTag,
+    availableTags,
     addNode,
   } = useNodeMap();
 
@@ -51,7 +54,7 @@ export const DashboardSection = () => {
             Create Your Knowledge Map
           </h2>
           <p className="text-base sm:text-lg text-slate-600">
-            Select memories or ideas, switch layouts (<strong className="text-slate-800">Cluster, Timeline, Categories</strong>), or click{' '}
+            Select memories or ideas, filter by tags, switch layouts (<strong className="text-slate-800">Cluster, Timeline, Categories</strong>), or click{' '}
             <strong className="text-violet-700">"Reveal Hidden Connections"</strong> to see AI suggested linkages.
           </p>
         </div>
@@ -78,6 +81,9 @@ export const DashboardSection = () => {
               onSearchChange={setSearchQuery}
               activeFilter={activeFilter}
               onFilterChange={setActiveFilter}
+              selectedTag={selectedTag}
+              onSelectTag={setSelectedTag}
+              availableTags={availableTags}
             />
 
             <div className="flex-1 relative">

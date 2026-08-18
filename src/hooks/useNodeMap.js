@@ -45,6 +45,7 @@ export const useNodeMap = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'memory', 'idea'
   const [layoutMode, setLayoutMode] = useState('cluster'); // 'cluster', 'timeline', 'category'
+  const [selectedTag, setSelectedTag] = useState(null); // Tag focus filter
 
   const addNode = (newNode) => {
     const createdNode = {
@@ -89,8 +90,15 @@ export const useNodeMap = () => {
                           node.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
     
     const matchesFilter = activeFilter === 'all' || node.type === activeFilter;
-    return matchesSearch && matchesFilter;
+    const matchesTag = !selectedTag || node.tags.includes(selectedTag);
+
+    return matchesSearch && matchesFilter && matchesTag;
   });
+
+  // Extract all unique tags across nodes
+  const availableTags = Array.from(
+    new Set(nodes.flatMap((node) => node.tags))
+  );
 
   const activeConnections = revealConnections
     ? [...connections, ...suggestedConnections]
@@ -115,6 +123,9 @@ export const useNodeMap = () => {
     setActiveFilter,
     layoutMode,
     setLayoutMode,
+    selectedTag,
+    setSelectedTag,
+    availableTags,
     addNode,
   };
 };

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Network, Menu, X, Sparkles, ArrowRight } from 'lucide-react';
+import { Network, Menu, X, Sparkles, Moon, Sun } from 'lucide-react';
 import Button from './ui/Button';
 import Container from './ui/Container';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +15,15 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'glass-nav py-3 shadow-sm' : 'bg-transparent py-5'}`}>
@@ -50,9 +60,17 @@ export const Navbar = () => {
             </a>
           </nav>
 
-          {/* CTA Buttons */}
+          {/* Theme Toggle & CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="#dashboard" className="text-sm font-medium text-slate-600 hover:text-slate-900 px-3 py-2">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
+              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {isDarkMode ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-slate-600" />}
+            </button>
+
+            <a href="#dashboard" className="text-sm font-medium text-slate-600 hover:text-slate-900 px-2 py-2">
               Sign In
             </a>
             <Button 
@@ -69,13 +87,21 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg border border-slate-200 text-slate-600"
+            >
+              {isDarkMode ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+              aria-label="Toggle Navigation Menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Drawer */}
