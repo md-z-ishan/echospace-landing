@@ -13,7 +13,7 @@ export function App() {
   const [demoRevealTrigger, setDemoRevealTrigger] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900 font-sans selection:bg-violet-400/30 selection:text-violet-900">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-white font-sans selection:bg-violet-400/30 selection:text-violet-900 transition-colors duration-300">
       <Navbar onOpenCommandPalette={() => setCommandPaletteTrigger(prev => !prev)} />
       <main className="flex-1">
         <HeroSection onTriggerDemoReveal={() => setDemoRevealTrigger(prev => !prev)} />

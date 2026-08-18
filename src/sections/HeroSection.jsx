@@ -6,7 +6,7 @@ import HeroVisual from '../components/HeroVisual';
 
 export const HeroSection = ({ onTriggerDemoReveal }) => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300">
       {/* Background Subtle Mesh Grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-40 dark:opacity-60 pointer-events-none" />
 
