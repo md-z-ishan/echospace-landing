@@ -6,6 +6,7 @@ import DashboardSection from './sections/DashboardSection';
 import HowItWorksSection from './sections/HowItWorksSection';
 import RevealConnectionsShowcase from './sections/RevealConnectionsShowcase';
 import UseCasesSection from './sections/UseCasesSection';
+import KeyboardShortcuts from './sections/KeyboardShortcuts';
 import FinalCTASection from './sections/FinalCTASection';
 import Footer from './components/Footer';
 
@@ -26,6 +27,7 @@ export function App() {
         <HowItWorksSection />
         <RevealConnectionsShowcase />
         <UseCasesSection />
+        <KeyboardShortcuts />
         <FinalCTASection />
       </main>
       <Footer />
