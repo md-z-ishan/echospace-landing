@@ -5,6 +5,7 @@ import ProblemSection from './sections/ProblemSection';
 import DashboardSection from './sections/DashboardSection';
 import HowItWorksSection from './sections/HowItWorksSection';
 import RevealConnectionsShowcase from './sections/RevealConnectionsShowcase';
+import IntegrationsSection from './sections/IntegrationsSection';
 import UseCasesSection from './sections/UseCasesSection';
 import KeyboardShortcuts from './sections/KeyboardShortcuts';
 import FinalCTASection from './sections/FinalCTASection';
@@ -26,6 +27,7 @@ export function App() {
         />
         <HowItWorksSection />
         <RevealConnectionsShowcase />
+        <IntegrationsSection />
         <UseCasesSection />
         <KeyboardShortcuts />
         <FinalCTASection />
