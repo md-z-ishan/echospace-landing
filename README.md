@@ -2,138 +2,138 @@
 
 > **"See connections between your memories and ideas"**
 
-EchoSpace is a visual knowledge mapping platform that transforms scattered thoughts into an interconnected personal knowledge graph. Unlike traditional note apps that force linear folder hierarchies, EchoSpace makes relationships between memories, articles, conversations, and ideas visually explicit.
-
-![EchoSpace Knowledge Graph Demo](https://raw.githubusercontent.com/md-z-ishan/echospace-landing/main/public/favicon.svg)
+EchoSpace is an interactive visual knowledge mapping platform designed for the **ACDYON Technologies Frontend Challenge (Part 2 — The Premium Home Page)**. Unlike traditional note-taking applications that force thoughts into rigid linear folder hierarchies where past research gets forgotten, EchoSpace renders memories, articles, conversations, and project ideas as an interconnected spatial knowledge graph.
 
 ---
 
-## Live Demo & Repository
+## 🌐 Live Demo & Submission Links
 
-- **Live Landing Page**: [echospace-landing.vercel.app](https://echospace-landing.vercel.app)
+- **Live Deployed Landing Page**: [echospace-landing.vercel.app](https://echospace-landing.vercel.app)
 - **GitHub Repository**: [github.com/md-z-ishan/echospace-landing](https://github.com/md-z-ishan/echospace-landing.git)
+- **Design Decisions Document**: [DECISIONS.md](DECISIONS.md)
 
 ---
 
-## What is EchoSpace?
+## 💡 What Problem Does EchoSpace Solve?
 
-Humans do not think linearly. You think in connections:
-- *"This article connects to that project idea."*
-- *"This coffee chat memory validates my core thesis."*
-- *"This GNN course provides the math for my spatial canvas."*
+Humans do not think in linear folder lists. You think in associative connections:
+- *"This research paper connects directly to my startup feature roadmap."*
+- *"This coffee chat memory validates my core project thesis."*
+- *"This GNN course provides the mathematical foundation for my spatial canvas."*
 
-EchoSpace solves note fragmentation by rendering your thoughts as **visual spatial nodes** connected by organic relationship links. You rediscover forgotten memories because they are visually tethered to current projects.
-
----
-
-## Key Features
-
-- 🧠 **Interactive Hero Canvas Network**: Live SVG/Canvas graph with glowing pulse connections, mouse hover halos, and dynamic particle effects.
-- ⚡ **Signature Interaction — "Reveal Hidden Connections"**: Click to trigger a smooth 500ms draw animation that reveals AI-suggested vector similarity links between thoughts.
-- 📄 **Thought Stream Sidebar**: Filter memories vs. ideas, search by tag or keyword, and inspect node metadata with explicit **DEMO DATA** labeling.
-- ➕ **Dynamic Quick-Add Node Modal**: Create your own custom Memory or Idea node and watch it instantly populate into the live knowledge graph.
-- 🔍 **Node Detail Inspector Drawer**: Click any node on the graph to inspect full snippet quotes, connected neighbors, AI reasoning, and tags.
-- 📐 **Linear vs. Connected Graph Comparison**: Interactive comparison showcase highlighting why traditional folder-based note apps fail.
-- 🎯 **Use Cases & Presets**: Specialized profile previews for Writers, Learners, and Creators.
-- 📱 **Mobile First & Fully Responsive**: Designed for 390px mobile screens up to 1440px+ ultra-wide displays without horizontal overflow.
+EchoSpace solves note fragmentation by tethering your thoughts into an organic **spatial node network**. You rediscover forgotten insights because past memories remain visually linked to active projects.
 
 ---
 
-## Tech Stack
+## ⭐ Key Features & Technical Highlights
 
-- **Framework**: [React 18](https://react.dev/) + [Vite 5](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) (Vanilla CSS tokens, Deep Indigo `#1E293B`, Glowing Violet `#A78BFA`, Cyan `#06B6D4`)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Visualization Engine**: HTML5 Canvas & SVG Bezier Pathing
-- **Fonts**: Google Fonts (`Inter` & `JetBrains Mono`)
+### ⚡ 1. Signature Interaction — "Reveal Hidden Connections"
+- **Side-by-Side Showcase**: Placed after *How It Works*, displaying a direct visual comparison: **BEFORE (4 static links)** vs **AFTER (7 AI-suggested links)**.
+- **Micro-Interaction**: Clicking *"Reveal Hidden Connections"* triggers a smooth 500ms stroke-dashoffset SVG drawing animation, glowing violet container rings, and a Web Audio API harmonic chime.
+
+### 🧠 2. Hero Section & Preset Switcher
+- **Hero Keyframe Sequence**: Container fade-in, staggered node pop-in keyframe animations (100ms apart), and self-drawing SVG tethers.
+- **Dataset Switcher**: Toggle between 3 pre-loaded domain graphs (*AI & Memory*, *Startup Strategy*, *Philosophy & Habits*) with real-time vector re-positioning.
+- **Value Badges**: Pill-shaped benefit cards (*No folder clutter*, *Visual node links*, *Instant discovery*) and 105% hover scale CTA buttons.
+
+### 🔷 3. ACDYON Honesty — Demo Data Disclosure Banner
+- **Honesty Requirement Compliance**: Prominent blue disclosure banner (*"↓ Demo Knowledge Map — Example Data ↓"*) placed at the top of the dashboard section to maintain 100% transparency with evaluators.
+
+### 🌐 4. Interactive Graph Layout Switcher
+- **Spatial Layout Modes**: Transform the canvas on the fly:
+  - **Cluster View**: Organic force network layout.
+  - **Timeline View**: Chronological axis from left to right.
+  - **Category View**: Grouped spatial columns (Memories vs. Ideas).
+
+### ⏳ 5. Time-Travel Graph Growth Slider
+- **Graph Evolution**: Interactive slider (`Aug 01` ➔ `Aug 24`) allowing users to watch nodes emerge and tether as their visual dimaag grows over time.
+
+### ⌨️ 6. Raycast-Style Command Palette (`⌘K` / `Ctrl+K`)
+- **Keyboard Navigation**: Press `⌘K` or click the search trigger to open a sleek Raycast/Linear-style overlay. Jump to any node or trigger actions without using a mouse.
+
+### 🤖 7. Ask AI Knowledge Assistant Drawer
+- **AI Synthesis**: Slide-over drawer presenting vector similarity scores (e.g. 84%–94% match) and contextual synthesis summaries explaining *why* notes connect.
+
+### 📊 8. Knowledge Density & Analytics Modal
+- **Graph Metrics**: Modal displaying Centrality Scores (influential thoughts) and Memory Decay Rate calculations.
+
+### 🔗 9. Interactive Node Connector & Custom Creation
+- **Node Linking**: Connect any two nodes on the graph and assign custom relationship labels (*"Inspired by"*, *"Builds on"*, *"Validates"*).
+- **Quick-Add Modal**: Create new custom Memory or Idea nodes that populate live into the active canvas.
+
+### 🔍 10. Node Detail Inspector Drawer
+- **Deep Inspection**: Click any node to open a right drawer showcasing full quote snippets, creation dates, focus tags, and tethered neighbor nodes.
+
+### 📄 11. Thought Stream Sidebar & Tag Filtering
+- **Real-Time Search**: Instant keyword search, type filter pills (*All*, *Memories*, *Ideas*), and focus tag filtering (`#Cognition`, `#AI`, `#UX Research`).
+
+### 📥 12. Knowledge Graph Export
+- **Data Ownership**: One-click download of the complete Knowledge Graph state as a structured `.json` export file.
+
+### 🔌 13. Connect Your Tools (Integrations)
+- **Ecosystem Cards**: *Notion* (`Coming Soon`), *Obsidian* (`Coming Soon`), *Markdown Export* (`Available`), and *REST API* (`Roadmap`) without using copyrighted trademark logos.
+
+### ⌨️ 14. Power User Shortcuts Section
+- **Hotkey Guide**: 6 styled hotkey cards (`⌘K`, `⌘N`, `⌘I`, `⌘L`, `⌘R`, `⌘/`) displayed in a responsive grid.
+
+### 🔒 15. Built With Privacy First
+- **Data Protection**: Transparent trust cards highlighting end-to-end encryption, no AI model training on user notes, and open-source security practices.
+
+### 🌙 16. High-Contrast Midnight Dark Theme (`#0B0F19`)
+- **All-or-Nothing Dark Mode**: Full dark mode engine with Navbar Sun/Moon toggle button, harmonic audio feedback, and high-contrast text legibility in both Light and Dark modes.
+
+### 🎁 17. ACDYON Bonus Round — Konami Code Easter Egg
+- **Secret Unlocked**: Type the classic Konami Code (**`↑ ↑ ↓ ↓ ← → ← → B A`**) anywhere on the site to trigger a secret audio chime chord and unlock Quantum Neural Mode!
 
 ---
 
-## Quick Start & Local Setup
+## 🎮 How To Test & Explore The Demo (Step-by-Step)
+
+1. **Explore Hero Presets**: Click *AI & Memory*, *Startup Strategy*, or *Philosophy & Habits* in the hero visualizer.
+2. **Trigger Signature Reveal**: Scroll to the *Discover Hidden Insights* showcase (or click *"Reveal Hidden Connections"* in the dashboard) to observe the 500ms SVG line animation and Web Audio chime.
+3. **Switch Graph Layouts**: In the product dashboard, click **Cluster**, **Timeline**, or **Categories** to see the nodes dynamically shift positions.
+4. **Test Time Travel**: Drag the *Time Travel* slider to see graph growth over time.
+5. **Open Command Palette**: Press **`⌘K`** (or **`Ctrl+K`**) to search nodes via keyboard.
+6. **Open AI Assistant**: Click **"Ask AI Brain"** to view contextual reasoning for note connections.
+7. **Create & Link Nodes**: Click **"+ Add Memory"** to insert a note, then click **"Link Nodes"** to tether two thoughts together.
+8. **Inspect Nodes**: Click any node card on the canvas or sidebar to open the inspector drawer.
+9. **Toggle Theme**: Click the Moon/Sun icon in the header to switch between Light Mode and Midnight Dark Mode (`#0B0F19`).
+10. **Unlock Easter Egg**: Type **`↑ ↑ ↓ ↓ ← → ← → B A`** on your keyboard for the ACDYON bonus round secret!
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Core Framework**: React 18 with Vite 5 (Fast Refresh)
+- **Styling System**: Tailwind CSS with custom glassmorphism utilities & HSL dark mode tokens
+- **Vector & Path Engine**: Custom SVG geometry math (`<line>`, `<path>`, stroke-dashoffset animations)
+- **Audio Synthesizer**: Native Web Audio API oscillator nodes (pure client-side harmonic sound generation)
+- **Icons**: Lucide React
+- **Typography**: Inter & JetBrains Mono font stacks
+
+---
+
+## 💻 Local Development Setup
 
 ```bash
 # 1. Clone repository
 git clone https://github.com/md-z-ishan/echospace-landing.git
+
+# 2. Navigate into project directory
 cd echospace-landing
 
-# 2. Install dependencies
+# 3. Install dependencies
 npm install
 
-# 3. Start development server
+# 4. Start local development server
 npm run dev
-# Open http://localhost:5173/ in your browser
-```
 
----
-
-## Production Build
-
-```bash
-# Build for production
+# 5. Build production bundle
 npm run build
-
-# Preview production build locally
-npm run preview
 ```
 
 ---
 
-## Project Structure
+## 📄 License & Attribution
 
-```
-echospace-landing/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   ├── Dashboard/
-│   │   │   ├── Controls.jsx
-│   │   │   ├── NodeInspector.jsx
-│   │   │   ├── NodeMap.jsx
-│   │   │   ├── QuickAddModal.jsx
-│   │   │   ├── Sidebar.jsx
-│   │   │   └── StatusBar.jsx
-│   │   ├── ui/
-│   │   │   ├── Badge.jsx
-│   │   │   ├── Button.jsx
-│   │   │   ├── Card.jsx
-│   │   │   ├── Container.jsx
-│   │   │   ├── Modal.jsx
-│   │   │   └── Node.jsx
-│   │   ├── Footer.jsx
-│   │   ├── HeroVisual.jsx
-│   │   └── Navbar.jsx
-│   ├── data/
-│   │   └── demoData.js
-│   ├── hooks/
-│   │   └── useNodeMap.js
-│   ├── sections/
-│   │   ├── DashboardSection.jsx
-│   │   ├── FinalCTASection.jsx
-│   │   ├── HeroSection.jsx
-│   │   ├── HowItWorksSection.jsx
-│   │   ├── ProblemSection.jsx
-│   │   └── UseCasesSection.jsx
-│   ├── styles/
-│   │   ├── animations.css
-│   │   └── globals.css
-│   ├── App.jsx
-│   └── main.jsx
-├── DECISIONS.md
-├── README.md
-├── package.json
-├── tailwind.config.js
-└── vite.config.js
-```
-
----
-
-## Design Decisions
-
-See [DECISIONS.md](./DECISIONS.md) for full design rationale, trade-off analysis, AI usage disclosures, and the 20-question interview defense guide.
-
----
-
-## Author & Credits
-
-Built by **Zishan** for the EchoSpace product showcase.
+Designed and engineered for the **ACDYON Technologies Frontend Challenge**. Includes [DECISIONS.md](DECISIONS.md) detailing technical design choices, scope tradeoffs, and engineering ownership.
