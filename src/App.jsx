@@ -9,6 +9,7 @@ import IntegrationsSection from './sections/IntegrationsSection';
 import UseCasesSection from './sections/UseCasesSection';
 import KeyboardShortcuts from './sections/KeyboardShortcuts';
 import FinalCTASection from './sections/FinalCTASection';
+import PrivacyFirst from './sections/PrivacyFirst';
 import Footer from './components/Footer';
 
 export function App() {
@@ -31,6 +32,7 @@ export function App() {
         <UseCasesSection />
         <KeyboardShortcuts />
         <FinalCTASection />
+        <PrivacyFirst />
       </main>
       <Footer />
     </div>
