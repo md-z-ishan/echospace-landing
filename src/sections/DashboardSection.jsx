@@ -11,6 +11,7 @@ import AiAssistantDrawer from '../components/Dashboard/AiAssistantDrawer';
 import AnalyticsModal from '../components/Dashboard/AnalyticsModal';
 import CommandPalette from '../components/CommandPalette';
 import NodeInspector from '../components/Dashboard/NodeInspector';
+import DemoDataBanner from '../components/Dashboard/DemoDataBanner';
 import useNodeMap from '../hooks/useNodeMap';
 
 export const DashboardSection = ({ externalCommandPaletteToggle, externalDemoRevealTrigger }) => {
@@ -69,25 +70,28 @@ export const DashboardSection = ({ externalCommandPaletteToggle, externalDemoRev
   };
 
   return (
-    <section id="dashboard" className="py-16 md:py-24 bg-slate-900/5 relative overflow-hidden">
+    <section id="dashboard" className="py-16 md:py-24 bg-slate-900/5 dark:bg-slate-950/40 relative overflow-hidden transition-colors">
       <Container size="lg">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-100 text-violet-800 text-xs font-bold font-mono tracking-wide">
-            <Sparkles className="w-3.5 h-3.5" />
+        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-100 dark:bg-violet-950/80 text-violet-800 dark:text-violet-300 text-xs font-bold font-mono tracking-wide">
+            <Sparkles className="w-3.5 h-3.5 text-violet-500 dark:text-violet-400" />
             <span>Interactive Product Dashboard Demo</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Create Your Knowledge Map
           </h2>
-          <p className="text-base sm:text-lg text-slate-600">
-            Press <strong className="font-mono text-violet-700 bg-violet-50 px-2 py-0.5 rounded border border-violet-200">⌘K</strong> for Command Palette, test <strong className="text-slate-800">Time Travel Slider</strong>, or click{' '}
-            <strong className="text-violet-700">"Ask AI Brain"</strong> for contextual node insights.
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300">
+            Press <strong className="font-mono text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-950 px-2 py-0.5 rounded border border-violet-200 dark:border-violet-800">⌘K</strong> for Command Palette, test <strong className="text-slate-800 dark:text-slate-200">Time Travel Slider</strong>, or click{' '}
+            <strong className="text-violet-700 dark:text-violet-400">"Ask AI Brain"</strong> for contextual node insights.
           </p>
         </div>
 
+        {/* ACDYON Honesty Requirement: Demo Data Disclosure Banner */}
+        <DemoDataBanner />
+
         {/* Dashboard Frame Container */}
-        <div className="relative bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+        <div className="relative bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
           {/* Top Controls Header */}
           <Controls
             revealConnections={revealConnections}
