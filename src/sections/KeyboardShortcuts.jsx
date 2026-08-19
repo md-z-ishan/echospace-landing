@@ -1,5 +1,5 @@
 import React from 'react';
-import { Command, Sparkles, Terminal } from 'lucide-react';
+import { Command } from 'lucide-react';
 import Container from '../components/ui/Container';
 
 const shortcutsList = [

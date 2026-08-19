@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ArrowRight, Network } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 

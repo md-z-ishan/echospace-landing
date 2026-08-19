@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, FileText, Network, FileCode, Plug, CheckCircle2, Clock, MapPin } from 'lucide-react';
+import { Layers, FileText, Network, FileCode, Plug, CheckCircle2 } from 'lucide-react';
 import Container from '../components/ui/Container';
 
 const integrationsList = [

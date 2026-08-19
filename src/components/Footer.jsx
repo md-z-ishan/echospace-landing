@@ -1,5 +1,5 @@
 import React from 'react';
-import { Network, Github, Twitter, Heart } from 'lucide-react';
+import { Network, Github, Heart } from 'lucide-react';
 import Container from './ui/Container';
 
 export const Footer = () => {
