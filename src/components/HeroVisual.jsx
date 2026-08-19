@@ -1,198 +1,172 @@
-import React, { useState, useEffect } from 'react';
-import { BookOpen, Lightbulb, MessageSquare, Sparkles, Brain, Network, Compass, Zap, Target, Users, Award } from 'lucide-react';
+import React, { useState } from 'react';
+import { Sparkles, Brain, BookOpen, Lightbulb, Zap, Network } from 'lucide-react';
 import { playNodeChime } from '../utils/audio';
 
-const heroDatasets = {
+const datasets = {
   ai: {
-    name: 'AI & Memory',
+    name: "AI & Memory",
     nodes: [
-      { id: 'hn1', title: "Article: AI Future", type: "memory", icon: BookOpen, x: 18, y: 22, color: "#06B6D4" },
-      { id: 'hn2', title: "Auto Tagging Idea", type: "idea", icon: Lightbulb, x: 74, y: 20, color: "#A78BFA" },
-      { id: 'hn3', title: "Coffee Chat Memory", type: "memory", icon: MessageSquare, x: 48, y: 46, color: "#06B6D4" },
-      { id: 'hn4', title: "Connections Matter", type: "insight", icon: Sparkles, x: 22, y: 78, color: "#F59E0B" },
-      { id: 'hn5', title: "ML Models Learning", type: "memory", icon: Brain, x: 80, y: 78, color: "#06B6D4" },
-      { id: 'hn6', title: "KG Project Builder", type: "idea", icon: Network, x: 50, y: 84, color: "#8B5CF6" },
+      { id: 1, label: "Article: AI Future", type: "memory", icon: BookOpen, x: 25, y: 28, stagger: "animate-node-stagger-1" },
+      { id: 2, label: "Coffee Chat Memory", type: "memory", icon: Brain, x: 70, y: 42, stagger: "animate-node-stagger-2" },
+      { id: 3, label: "ML Models Learning", type: "memory", icon: Zap, x: 78, y: 80, stagger: "animate-node-stagger-3" },
+      { id: 4, label: "Auto Tagging Idea", type: "idea", icon: Lightbulb, x: 78, y: 25, stagger: "animate-node-stagger-4" },
+      { id: 5, label: "KG Project Builder", type: "idea", icon: Network, x: 70, y: 62, stagger: "animate-node-stagger-5" },
+      { id: 6, label: "Connections Matter", type: "insight", icon: Sparkles, x: 62, y: 58, stagger: "animate-node-stagger-6" },
     ],
     connections: [
-      { from: 'hn1', to: 'hn2' }, { from: 'hn1', to: 'hn3' },
-      { from: 'hn2', to: 'hn4' }, { from: 'hn3', to: 'hn4' },
-      { from: 'hn5', to: 'hn6' }, { from: 'hn4', to: 'hn6' }
+      { from: 1, to: 4, label: "Suggested: Model Mapping" },
+      { from: 1, to: 2, label: "Discussed" },
+      { from: 2, to: 5, label: "Suggested: User Need" },
+      { from: 3, to: 5, label: "Technical basis" },
+      { from: 5, to: 6, label: "Integrates with" },
     ]
   },
   startup: {
-    name: 'Startup Strategy',
+    name: "Startup Strategy",
     nodes: [
-      { id: 'sn1', title: "Customer Interview", type: "memory", icon: Users, x: 20, y: 24, color: "#06B6D4" },
-      { id: 'sn2', title: "SaaS Pricing Model", type: "idea", icon: Target, x: 70, y: 22, color: "#A78BFA" },
-      { id: 'sn3', title: "Market Size Report", type: "memory", icon: BookOpen, x: 46, y: 48, color: "#06B6D4" },
-      { id: 'sn4', title: "Viral Growth Hack", type: "idea", icon: Zap, x: 24, y: 80, color: "#F59E0B" },
-      { id: 'sn5', title: "Product Roadmap", type: "idea", icon: Network, x: 78, y: 80, color: "#8B5CF6" },
-      { id: 'sn6', title: "Retention Metric", type: "memory", icon: Award, x: 52, y: 82, color: "#06B6D4" },
+      { id: 1, label: "User Interview #12", type: "memory", icon: Brain, x: 25, y: 28, stagger: "animate-node-stagger-1" },
+      { id: 2, label: "Competitor Analysis", type: "memory", icon: BookOpen, x: 70, y: 42, stagger: "animate-node-stagger-2" },
+      { id: 3, label: "CAC Reduction Data", type: "memory", icon: Zap, x: 78, y: 80, stagger: "animate-node-stagger-3" },
+      { id: 4, label: "Freemium Conversion", type: "idea", icon: Lightbulb, x: 78, y: 25, stagger: "animate-node-stagger-4" },
+      { id: 5, label: "Self-Serve Onboarding", type: "idea", icon: Network, x: 70, y: 62, stagger: "animate-node-stagger-5" },
+      { id: 6, label: "Viral Growth Loop", type: "insight", icon: Sparkles, x: 62, y: 58, stagger: "animate-node-stagger-6" },
     ],
     connections: [
-      { from: 'sn1', to: 'sn2' }, { from: 'sn1', to: 'sn3' },
-      { from: 'sn3', to: 'sn5' }, { from: 'sn2', to: 'sn6' },
-      { from: 'sn4', to: 'sn5' }, { from: 'sn6', to: 'sn5' }
+      { from: 1, to: 4, label: "Pain point" },
+      { from: 1, to: 2, label: "Validated" },
+      { from: 2, to: 5, label: "Feature gap" },
+      { from: 3, to: 5, label: "ROI driver" },
+      { from: 5, to: 6, label: "Core flywheel" },
     ]
   },
   philosophy: {
-    name: 'Philosophy & Habits',
+    name: "Philosophy & Habits",
     nodes: [
-      { id: 'pn1', title: "Atomic Habits Book", type: "memory", icon: BookOpen, x: 22, y: 20, color: "#06B6D4" },
-      { id: 'pn2', title: "Dopamine Detox Idea", type: "idea", icon: Lightbulb, x: 76, y: 22, color: "#A78BFA" },
-      { id: 'pn3', title: "Marcus Aurelius Note", type: "memory", icon: Compass, x: 50, y: 46, color: "#06B6D4" },
-      { id: 'pn4', title: "Journaling Habit", type: "memory", icon: MessageSquare, x: 20, y: 78, color: "#06B6D4" },
-      { id: 'pn5', title: "Habit Tracker App", type: "idea", icon: Zap, x: 78, y: 78, color: "#8B5CF6" },
-      { id: 'pn6', title: "Mindfulness Insight", type: "insight", icon: Sparkles, x: 48, y: 84, color: "#F59E0B" },
+      { id: 1, label: "Atomic Habits Chapter", type: "memory", icon: BookOpen, x: 25, y: 28, stagger: "animate-node-stagger-1" },
+      { id: 2, label: "Morning Journaling", type: "memory", icon: Brain, x: 70, y: 42, stagger: "animate-node-stagger-2" },
+      { id: 3, label: "Stoic Quotes Note", type: "memory", icon: Zap, x: 78, y: 80, stagger: "animate-node-stagger-3" },
+      { id: 4, label: "Time-Blocking System", type: "idea", icon: Lightbulb, x: 78, y: 25, stagger: "animate-node-stagger-4" },
+      { id: 5, label: "Deep Work Protocol", type: "idea", icon: Network, x: 70, y: 62, stagger: "animate-node-stagger-5" },
+      { id: 6, label: "Compound Attention", type: "insight", icon: Sparkles, x: 62, y: 58, stagger: "animate-node-stagger-6" },
     ],
     connections: [
-      { from: 'pn1', to: 'pn2' }, { from: 'pn1', to: 'pn3' },
-      { from: 'pn3', to: 'pn6' }, { from: 'pn4', to: 'pn6' },
-      { from: 'pn2', to: 'pn5' }, { from: 'pn6', to: 'pn5' }
+      { from: 1, to: 4, label: "Inspired by" },
+      { from: 1, to: 2, label: "Daily trigger" },
+      { from: 2, to: 5, label: "Focus ritual" },
+      { from: 3, to: 5, label: "Mindset anchor" },
+      { from: 5, to: 6, label: "Output multiplier" },
     ]
   }
 };
 
 export const HeroVisual = () => {
-  const [activeDatasetKey, setActiveDatasetKey] = useState('ai');
-  const [activeNode, setActiveNode] = useState(null);
-  const [pulseIndex, setPulseIndex] = useState(0);
+  const [activePreset, setActivePreset] = useState('ai');
+  const [hoveredNode, setHoveredNode] = useState(null);
 
-  const currentDataset = heroDatasets[activeDatasetKey];
+  const activeData = datasets[activePreset];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPulseIndex((prev) => (prev + 1) % currentDataset.connections.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [currentDataset]);
-
-  const getNodeCoords = (id) => {
-    const n = currentDataset.nodes.find((node) => node.id === id);
-    return n ? { x: n.x, y: n.y } : { x: 0, y: 0 };
-  };
-
-  const handleSelectPreset = (key) => {
-    setActiveDatasetKey(key);
-    playNodeChime(659.25); // E5 chime sound
+  const handlePresetSwitch = (key) => {
+    setActivePreset(key);
+    playNodeChime(659.25);
   };
 
   return (
-    <div className="relative w-full h-[440px] sm:h-[500px] rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl p-6 overflow-hidden select-none">
-      {/* Background Dot Matrix Pattern */}
-      <div className="absolute inset-0 bg-dot-matrix opacity-20 pointer-events-none" />
+    <div className="animate-hero-canvas-frame relative w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-slate-700/60 shadow-2xl p-4 overflow-hidden select-none">
+      {/* Background Radial Glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/10 via-transparent to-cyan-500/10 pointer-events-none" />
 
-      {/* Radial Ambient Glow Highlights */}
-      <div className="absolute -top-20 -left-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-violet-500/15 rounded-full blur-3xl pointer-events-none" />
+      {/* Hero Preset Switcher Buttons Header */}
+      <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-xl border border-slate-800 text-xs">
+        <span className="font-mono text-[10px] uppercase font-bold text-slate-400">
+          Presets:
+        </span>
 
-      {/* Dataset Switcher Header Pills */}
-      <div className="absolute top-4 left-4 z-30 flex items-center gap-1.5 p-1 bg-slate-950/80 border border-slate-800 backdrop-blur-md rounded-xl text-[10px] font-mono">
-        <span className="text-slate-400 px-2 py-0.5 font-bold uppercase">Presets:</span>
-        {Object.keys(heroDatasets).map((key) => (
-          <button
-            key={key}
-            onClick={() => handleSelectPreset(key)}
-            className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer font-semibold ${activeDatasetKey === key ? 'bg-violet-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            {heroDatasets[key].name}
-          </button>
-        ))}
+        <div className="flex items-center gap-1">
+          {Object.entries(datasets).map(([key, data]) => (
+            <button
+              key={key}
+              onClick={() => handlePresetSwitch(key)}
+              className={`
+                px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer
+                ${activePreset === key
+                  ? 'bg-violet-600 text-white shadow-glow-violet'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                }
+              `}
+            >
+              {data.name}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Live Connection Lines Layer */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none">
-        <defs>
-          <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.7" />
-            <stop offset="100%" stopColor="#A78BFA" stopOpacity="0.8" />
-          </linearGradient>
-          <filter id="heroGlow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
+      {/* SVG Canvas for Lines with Keyframe Line Draw & Cycling Pulse */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        {activeData.connections.map((conn, idx) => {
+          const fromNode = activeData.nodes.find(n => n.id === conn.from);
+          const toNode = activeData.nodes.find(n => n.id === conn.to);
 
-        {currentDataset.connections.map((conn, idx) => {
-          const from = getNodeCoords(conn.from);
-          const to = getNodeCoords(conn.to);
-          const isPulsing = idx === pulseIndex;
-          const isConnectedToActive = activeNode && (conn.from === activeNode || conn.to === activeNode);
+          if (!fromNode || !toNode) return null;
+
+          const isConnected = hoveredNode === conn.from || hoveredNode === conn.to;
 
           return (
-            <g key={`hero-conn-${activeDatasetKey}-${idx}`}>
+            <g key={idx}>
               <line
-                x1={`${from.x}%`}
-                y1={`${from.y}%`}
-                x2={`${to.x}%`}
-                y2={`${to.y}%`}
-                stroke={isConnectedToActive ? "#A78BFA" : "url(#heroGradient)"}
-                strokeWidth={isConnectedToActive ? 2.8 : isPulsing ? 2.5 : 1.5}
-                strokeDasharray={isPulsing ? "6 6" : "none"}
-                className="transition-all duration-700 ease-in-out"
-                opacity={activeNode ? (isConnectedToActive ? 1 : 0.25) : 0.6}
-                filter={isPulsing || isConnectedToActive ? "url(#heroGlow)" : "none"}
+                x1={`${fromNode.x}%`}
+                y1={`${fromNode.y}%`}
+                x2={`${toNode.x}%`}
+                y2={`${toNode.y}%`}
+                stroke={isConnected ? '#22D3EE' : conn.label.includes('Suggested') ? '#A78BFA' : '#334155'}
+                strokeWidth={isConnected ? '3' : '2'}
+                strokeDasharray={conn.label.includes('Suggested') ? '6 4' : 'none'}
+                className="animate-svg-line-draw transition-all duration-300"
               />
             </g>
           );
         })}
       </svg>
 
-      {/* Interactive Node Cards */}
-      {currentDataset.nodes.map((node) => {
-        const Icon = node.icon;
-        const isActive = activeNode === node.id;
+      {/* Render 6 Nodes with Staggered Pop-In Keyframes */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        {activeData.nodes.map((node) => {
+          const Icon = node.icon;
+          const isHovered = hoveredNode === node.id;
 
-        return (
-          <div
-            key={`${activeDatasetKey}-${node.id}`}
-            onMouseEnter={() => {
-              setActiveNode(node.id);
-              playNodeChime(440);
-            }}
-            onMouseLeave={() => setActiveNode(null)}
-            style={{ left: `${node.x}%`, top: `${node.y}%` }}
-            className={`
-              absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-700 cubic-bezier(0.34, 1.56, 0.64, 1)
-              flex items-center gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl border backdrop-blur-md
-              ${isActive 
-                ? 'bg-slate-800 border-violet-400 text-white scale-110 z-30 shadow-glow-violet' 
-                : 'bg-slate-900/90 border-slate-700/80 text-slate-200 hover:border-slate-500 z-10'
-              }
-            `}
-          >
-            <div 
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-colors"
-              style={{ backgroundColor: `${node.color}20`, color: node.color }}
+          return (
+            <div
+              key={node.id}
+              style={{ left: `${node.x}%`, top: `${node.y}%` }}
+              onMouseEnter={() => {
+                setHoveredNode(node.id);
+                playNodeChime(440 + node.id * 50);
+              }}
+              onMouseLeave={() => setHoveredNode(null)}
+              className={`
+                ${node.stagger} absolute pointer-events-auto cursor-pointer transition-all duration-300
+                px-3 py-2 rounded-xl bg-slate-900/90 border backdrop-blur-md shadow-lg flex items-center gap-2 max-w-[160px]
+                ${isHovered
+                  ? 'scale-110 border-violet-400 shadow-glow-violet ring-2 ring-violet-400 text-white z-30'
+                  : 'border-slate-700/80 text-slate-200 hover:border-slate-500'
+                }
+              `}
             >
-              <Icon className="w-4 h-4" />
+              <div className={`p-1 rounded-lg ${node.type === 'memory' ? 'bg-cyan-950 text-cyan-400' : 'bg-violet-950 text-violet-400'}`}>
+                <Icon className="w-3.5 h-3.5" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[11px] font-bold truncate leading-tight">{node.label}</span>
+                <span className="text-[9px] font-mono text-slate-400 uppercase">{node.type}</span>
+              </div>
             </div>
+          );
+        })}
+      </div>
 
-            <div className="flex flex-col text-left">
-              <span className="text-xs sm:text-sm font-semibold tracking-tight whitespace-nowrap">
-                {node.title}
-              </span>
-              <span className="text-[9px] font-mono text-slate-400 uppercase tracking-widest">
-                {node.type}
-              </span>
-            </div>
-
-            {/* Glowing Pulse Dot */}
-            <div 
-              className={`w-2 h-2 rounded-full absolute -top-1 -right-1 transition-opacity ${isActive ? 'opacity-100 animate-ping' : 'opacity-40'}`}
-              style={{ backgroundColor: node.color }}
-            />
-          </div>
-        );
-      })}
-
-      {/* Floating Status Indicator Tag */}
-      <div className="absolute bottom-4 left-4 bg-slate-950/80 border border-slate-800 backdrop-blur-md px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs font-mono text-slate-300">
+      {/* Footer Info */}
+      <div className="absolute bottom-3 left-3 z-20 flex items-center gap-2 text-[10px] font-mono text-slate-400 bg-slate-950/80 px-2.5 py-1 rounded-md border border-slate-800">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-        <span>Dataset: {currentDataset.name} • 6 Nodes</span>
+        <span>Dataset: {activeData.name} • {activeData.nodes.length} Nodes</span>
       </div>
     </div>
   );

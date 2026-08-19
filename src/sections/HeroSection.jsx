@@ -14,14 +14,14 @@ export const HeroSection = ({ onTriggerDemoReveal }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column (60% Desktop) — Value Proposition */}
           <div className="lg:col-span-7 flex flex-col text-left space-y-6">
-            {/* Top Pill Tag */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-50 dark:bg-violet-950/80 border border-violet-200/80 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 text-xs font-semibold tracking-wide w-fit shadow-sm">
+            {/* Top Pill Tag (Fade in first) */}
+            <div className="animate-hero-pill inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-50 dark:bg-violet-950/80 border border-violet-200/80 dark:border-violet-500/40 text-violet-700 dark:text-violet-300 text-xs font-semibold tracking-wide w-fit shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-violet-500 dark:text-violet-400" />
               <span>Introducing EchoSpace Knowledge Graph</span>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1]">
+            {/* Headline (Fade in 600ms, 100ms delay) */}
+            <h1 className="animate-hero-title text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1]">
               See connections between your{' '}
               <span className="bg-gradient-to-r from-cyan-600 via-violet-600 to-purple-600 dark:from-cyan-400 dark:via-violet-400 dark:to-purple-400 bg-clip-text text-transparent">
                 memories
@@ -32,17 +32,18 @@ export const HeroSection = ({ onTriggerDemoReveal }) => {
               </span>
             </h1>
 
-            {/* Subheading */}
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-2xl">
+            {/* Subheading (Fade in 600ms, 400ms delay) */}
+            <p className="animate-hero-sub text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-2xl">
               Your thoughts live in isolation. EchoSpace connects them visually. Rediscover forgotten memories. See patterns emerge across time.
             </p>
 
-            {/* CTAs */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            {/* CTAs (Fade in 600ms, 600ms delay + Hover 105% Scale) */}
+            <div className="animate-hero-cta pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Button 
                 variant="primary" 
                 size="lg" 
                 icon={Sparkles}
+                className="hover:scale-105 transition-transform duration-200"
                 onClick={() => {
                   const el = document.getElementById('dashboard');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -54,6 +55,7 @@ export const HeroSection = ({ onTriggerDemoReveal }) => {
                 variant="secondary" 
                 size="lg" 
                 icon={Play}
+                className="hover:scale-105 transition-transform duration-200"
                 onClick={() => {
                   if (onTriggerDemoReveal) onTriggerDemoReveal();
                   const el = document.getElementById('dashboard');
@@ -64,8 +66,8 @@ export const HeroSection = ({ onTriggerDemoReveal }) => {
               </Button>
             </div>
 
-            {/* Trust Badges */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-slate-500 dark:text-slate-400 font-medium">
+            {/* Trust Badges (Fade in 600ms, 800ms delay) */}
+            <div className="animate-hero-badges pt-4 flex flex-wrap items-center gap-6 text-xs text-slate-500 dark:text-slate-400 font-medium">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-violet-500 dark:text-violet-400" />
                 <span>No folder clutter</span>
