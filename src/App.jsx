@@ -4,6 +4,7 @@ import HeroSection from './sections/HeroSection';
 import ProblemSection from './sections/ProblemSection';
 import DashboardSection from './sections/DashboardSection';
 import HowItWorksSection from './sections/HowItWorksSection';
+import RevealConnectionsShowcase from './sections/RevealConnectionsShowcase';
 import UseCasesSection from './sections/UseCasesSection';
 import FinalCTASection from './sections/FinalCTASection';
 import Footer from './components/Footer';
@@ -23,6 +24,7 @@ export function App() {
           externalDemoRevealTrigger={demoRevealTrigger}
         />
         <HowItWorksSection />
+        <RevealConnectionsShowcase />
         <UseCasesSection />
         <FinalCTASection />
       </main>
