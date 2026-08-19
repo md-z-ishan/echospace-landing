@@ -1,5 +1,11 @@
 # EchoSpace — Technical & Design Decisions
 
+> **Live Deployed URL**: [echospace-landing.vercel.app](https://echospace-landing.vercel.app)  
+> **GitHub Repository**: [github.com/md-z-ishan/echospace-landing](https://github.com/md-z-ishan/echospace-landing.git)  
+> **Challenge**: ACDYON Technologies Frontend Challenge (Part 2 — The Premium Home Page)
+
+---
+
 ## 1. Why this approach over the obvious alternative?
 
 Instead of building a traditional SaaS landing page filled with static text blocks or a generic task manager, I chose to engineer **EchoSpace**—an interactive personal knowledge graph visualizer that directly solves note fragmentation.
