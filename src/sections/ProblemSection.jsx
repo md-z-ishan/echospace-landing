@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Sparkles, FolderX, Network, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Sparkles, FolderX, Network, CheckCircle2 } from 'lucide-react';
 import Container from '../components/ui/Container';
-import Card from '../components/ui/Card';
 
 export const ProblemSection = () => {
   const [activeTab, setActiveTab] = useState('echospace');
@@ -41,10 +40,10 @@ export const ProblemSection = () => {
           </div>
         </div>
 
-        {/* Comparison Showcase */}
+        {/* Comparison Showcase Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Traditional Card */}
-          <div className={`p-8 rounded-3xl border transition-all duration-300 ${activeTab === 'traditional' ? 'bg-white dark:bg-slate-900 border-red-200 dark:border-red-900/50 shadow-xl ring-2 ring-red-400/30' : 'bg-slate-100/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 opacity-60'}`}>
+          <div className={`p-8 rounded-3xl border transition-all duration-300 ${activeTab === 'traditional' ? 'bg-white dark:bg-slate-900 border-red-300 dark:border-red-900/50 shadow-xl ring-2 ring-red-400/30' : 'bg-white/80 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 opacity-60'}`}>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-2xl bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center font-bold">
                 <FolderX className="w-6 h-6" />
@@ -55,35 +54,39 @@ export const ProblemSection = () => {
               </div>
             </div>
 
-            <ul className="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+            <ul className="space-y-4 text-sm text-slate-700 dark:text-slate-300">
               <li className="flex items-start gap-3">
-                <span className="text-red-500 font-bold text-lg">✕</span>
+                <span className="text-red-500 font-bold text-lg leading-none">✕</span>
                 <span>Notes hidden 4 levels deep in subfolders</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-red-500 font-bold text-lg">✕</span>
+                <span className="text-red-500 font-bold text-lg leading-none">✕</span>
                 <span>Zero context links between past memories & new ideas</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-red-500 font-bold text-lg">✕</span>
+                <span className="text-red-500 font-bold text-lg leading-none">✕</span>
                 <span>Requires manual tagging and tagging fatigue</span>
               </li>
             </ul>
           </div>
 
-          {/* EchoSpace Graph Card */}
-          <div className={`p-8 rounded-3xl border transition-all duration-300 ${activeTab === 'echospace' ? 'bg-gradient-to-br from-violet-900/90 to-slate-900 border-violet-500/50 text-white shadow-2xl ring-2 ring-violet-400 shadow-glow-violet' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'}`}>
+          {/* EchoSpace Graph Card (High-Contrast White Text on Dark Violet Gradient) */}
+          <div className={`p-8 rounded-3xl border transition-all duration-300 ${activeTab === 'echospace' ? 'bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 border-violet-500/60 shadow-2xl ring-2 ring-violet-400 shadow-glow-violet' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 opacity-70'}`}>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-2xl bg-violet-600 text-white flex items-center justify-center font-bold shadow-glow-violet">
                 <Network className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">EchoSpace Visual Brain</h3>
-                <span className="text-xs text-violet-300">Living Connected Canvas</span>
+                <h3 className={`text-xl font-bold ${activeTab === 'echospace' ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
+                  EchoSpace Visual Brain
+                </h3>
+                <span className={`text-xs ${activeTab === 'echospace' ? 'text-violet-300 font-semibold' : 'text-violet-600 dark:text-violet-400'}`}>
+                  Living Connected Canvas
+                </span>
               </div>
             </div>
 
-            <ul className="space-y-4 text-sm text-slate-700 dark:text-slate-200">
+            <ul className={`space-y-4 text-sm font-medium ${activeTab === 'echospace' ? 'text-slate-100' : 'text-slate-700 dark:text-slate-300'}`}>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-violet-400 shrink-0 mt-0.5" />
                 <span>Automatic AI vector connection discovery</span>
